@@ -1,0 +1,58 @@
+﻿@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml"; // Use a different layout for this view
+    ViewData["Title"] = "Home";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Bus Booking</title>
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <div class="wrap">
+        <!-- Header -->
+        <header class="head bg-blue text-white text-center pad-lg round shadow">
+            <h1 class="title">Welcome to Bus Booking</h1>
+            <p class="sub-title">Plan your journey and book tickets easily with us!</p>
+            <a href="/Booking" class="btn">Book a Ticket</a>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Features Section -->
+            <section class="feat sec">
+                <h2 class="sec-title">Why Choose Us?</h2>
+                <div class="grid col-1 md-col-3 gap">
+                    <article class="card">
+                        
+                        <h3>Easy Booking</h3>
+                        <p>Book your tickets in just a few clicks with our platform.</p>
+                    </article>
+                    <article class="card">
+                        
+                        <h3>Safe Travel</h3>
+                        <p>Experience safe and comfortable journeys with our buses.</p>
+                    </article>
+                    <article class="card">
+                        
+                        <h3>24/7 Support</h3>
+                        <p>We are here to assist you anytime for a smooth travel experience.</p>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="foot text-center">
+            <p>&copy; 2025 Bus Booking. All Rights Reserved.</p>
+            <nav>
+                <a href="/Terms" class="link">Terms</a> |
+                <a href="/Privacy" class="link">Privacy</a>
+            </nav>
+        </footer>
+    </div>
+</body>
+</html>

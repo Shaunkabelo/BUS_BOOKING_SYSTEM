@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Bus_Booking_Library.Models.Domain.Bus>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Bus Management";
+}
+<link href="~/css/Admin.css" rel="stylesheet" />
+<h2>Bus Management</h2>
+
+<a href="@Url.Action("AddBus", "Admin")" class="btn btn-primary">Add New Bus</a>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Bus ID</th>
+            <th>Bus Number</th>
+            <th>Type</th>
+            <th>Total Seats</th>
+            <th>Available Seats</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var bus in Model)
+            {
+                <tr>
+                    <td>@bus.BusID</td>
+                    <td>@bus.BusNumber</td>
+                    <td>@bus.BusType</td>
+                    <td>@bus.TotalSeats</td>
+                    <td>@bus.AvailableSeats</td>
+                    <td>
+                        <a href="@Url.Action("EditBus", "Admin", new { id = bus.BusID })" class="btn btn-warning">Edit</a>
+                        <a href="@Url.Action("DeleteBus", "Admin", new { id = bus.BusID })" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this bus?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">No buses available.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

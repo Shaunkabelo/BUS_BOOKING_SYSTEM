@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Bus Booking System</title>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"></script>
+</head>
+
+
+<body class="bg-gray-100 text-gray-800">
+    <!-- Header / Navigation -->
+    <header class="bg">
+        <div class="containerr">
+            <div class="logo-container flex items-center">
+                
+                <span class="text-2xl font-bold ml-3">Express Booking System</span>
+            </div>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="/Login/Index" class="hover:text-blue-200">Home</a></li>
+                    <li><a href="/About" class="hover:text-blue-200">About Us</a></li>
+                    <li><a href="/Contact" class="hover:text-blue-200">Contact</a></li>
+                    <li><a href="/Login/Login" class="hover:text-blue-200">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-6">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 Bus Booking System. All Rights Reserved.</p>
+            <p>
+                <a href="/Terms" class="hover:text-white">Terms & Conditions</a> |
+                <a href="/Privacy" class="hover:text-white">Privacy Policy</a>
+            </p>
+        </div>
+    </footer>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+

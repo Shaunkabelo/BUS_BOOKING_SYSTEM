@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Admin Panel</title>
+    <link href="~/css/Admin.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="navbar">
+        <h2>Admin Panel</h2>
+        <ul>
+            <li><a asp-controller="Admin" asp-action="BusManagement">Dashboard</a></li>
+            <li><a asp-controller="Admin" asp-action="Addbus">Manage Buses</a></li>
+            <li><a asp-controller="Admin" asp-action="ManageUsers">Manage Users</a></li>
+            <li><a asp-controller="Admin" asp-action="Reports">Reports</a></li>
+            <li><a asp-controller="Account" asp-action="Logout" class="logout">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <header>
+            <h1>@ViewData["Title"]</h1>
+        </header>
+
+        <main>
+            @RenderBody()
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; @DateTime.Now.Year Bus Booking System. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
+

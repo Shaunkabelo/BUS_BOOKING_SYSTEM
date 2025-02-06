@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bus_Booking_System", "Bus_Booking_System.csproj", "{AF081FE7-22F4-4405-85BD-218AB34C5CBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bus_Booking_Library", "..\Bus_Booking_Library\Bus_Booking_Library.csproj", "{EE048144-036D-4A88-A3CD-AA0E65836EE4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF081FE7-22F4-4405-85BD-218AB34C5CBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF081FE7-22F4-4405-85BD-218AB34C5CBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF081FE7-22F4-4405-85BD-218AB34C5CBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF081FE7-22F4-4405-85BD-218AB34C5CBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE048144-036D-4A88-A3CD-AA0E65836EE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE048144-036D-4A88-A3CD-AA0E65836EE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE048144-036D-4A88-A3CD-AA0E65836EE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE048144-036D-4A88-A3CD-AA0E65836EE4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6434911-9DCE-4399-AA3A-415C33C0DFF9}
+	EndGlobalSection
+EndGlobal

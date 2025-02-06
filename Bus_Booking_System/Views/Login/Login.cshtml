@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";  // Use a different layout for this view
+}
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Bus Booking System</title>
+   
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Main Login Container -->
+    <div class="flex justify-center items-center min-h-screen bg-gray-100">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+            <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">Login</h2>
+
+            <!-- Login Form -->
+            <form method="post" action="/Account/Login">
+                <!-- Username -->
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700">Username</label>
+                    <input type="text" id="username" name="username" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" required />
+                </div>
+
+                <!-- Password -->
+                <div class="mb-4">
+                    <label for="password" class="block text-gray-700">Password</label>
+                    <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" required />
+                </div>
+
+                <!-- Show Password -->
+                <div class="flex items-center mb-4">
+                    <input type="checkbox" id="showPassword" class="mr-2" />
+                    <label for="showPassword" class="text-sm text-gray-600">Show Password</label>
+                </div>
+
+                <!-- Login Button -->
+                <div class="mb-6">
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600">Login</button>
+                </div>
+
+                <!-- Guest Option -->
+                <div class="text-center">
+                    <p class="text-sm text-gray-600">Or <a href="/Home/Guest" class="text-blue-600 hover:underline">Continue as Guest</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Show/Hide password toggle
+        document.getElementById('showPassword').addEventListener('change', function() {
+            var passwordField = document.getElementById('password');
+            if (this.checked) {
+                passwordField.type = 'text';
+            } else {
+                passwordField.type = 'password';
+            }
+        });
+    </script>
+
+</body>
+</html>
+

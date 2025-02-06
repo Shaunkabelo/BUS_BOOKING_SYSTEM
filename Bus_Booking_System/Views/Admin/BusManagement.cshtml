@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Bus_Booking_Library.Models.Domain.Bus>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Bus Management";
+}
+
+<h2>Bus Management</h2>
+
+<a href="@Url.Action("AddBus", "Admin")" class="btn btn-primary">Add New Bus</a>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Bus ID</th>
+            <th>Bus Number</th>
+            <th>Company</th>
+            <th>Type</th>
+            <th>Total Seats</th>
+            <th>Available Seats</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bus in Model)
+        {
+            <tr>
+                <td>@bus.BusID</td>
+                <td>@bus.BusNumber</td>
+                <td>@bus.Company</td>
+                <td>@bus.BusType</td>
+                <td>@bus.TotalSeats</td>
+                <td>@bus.AvailableSeats</td>
+                <td>
+                    <a href="@Url.Action("EditBus", "Admin", new { id = bus.BusID })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("DeleteBus", "Admin", new { id = bus.BusID })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
