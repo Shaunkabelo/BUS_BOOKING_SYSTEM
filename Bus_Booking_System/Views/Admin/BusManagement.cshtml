@@ -1,42 +1,5 @@
-﻿@model IEnumerable<Bus_Booking_Library.Models.Domain.Bus>
-
-@{
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewData["Title"] = "Bus Management";
-}
-
-<h2>Bus Management</h2>
-
-<a href="@Url.Action("AddBus", "Admin")" class="btn btn-primary">Add New Bus</a>
-
-<table class="table mt-3">
-    <thead>
-        <tr>
-            <th>Bus ID</th>
-            <th>Bus Number</th>
-            <th>Company</th>
-            <th>Type</th>
-            <th>Total Seats</th>
-            <th>Available Seats</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var bus in Model)
-        {
-            <tr>
-                <td>@bus.BusID</td>
-                <td>@bus.BusNumber</td>
-                <td>@bus.Company</td>
-                <td>@bus.BusType</td>
-                <td>@bus.TotalSeats</td>
-                <td>@bus.AvailableSeats</td>
-                <td>
-                    <a href="@Url.Action("EditBus", "Admin", new { id = bus.BusID })" class="btn btn-warning">Edit</a>
-                    <a href="@Url.Action("DeleteBus", "Admin", new { id = bus.BusID })" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
+@model List<FleetInput>
+@{ ViewData["Title"] = "Manage buses"; }
+<partial name="_AdminNav" /><div class="section-heading"><h1>Your fleet</h1><a class="button" asp-action="AddBus">Add a bus</a></div><section class="panel table-responsive"><table class="table"><thead><tr><th>Bus number</th><th>Operator</th><th>Type</th><th>Seats</th><th>Actions</th></tr></thead><tbody>
+@foreach (var b in Model) { <tr><td>@b.BusNumber</td><td>@b.Company</td><td>@b.BusType</td><td>@b.TotalSeats</td><td class="table-actions"><a asp-action="EditBus" asp-route-id="@b.Id">Edit</a><form asp-action="DeleteBus" method="post" onsubmit="return confirm('Delete this bus? Buses with schedules are protected.')"><input type="hidden" name="id" value="@b.Id" /><button class="text-button danger" type="submit">Delete</button></form></td></tr> }
+</tbody></table></section>

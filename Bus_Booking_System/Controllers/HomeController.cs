@@ -13,9 +13,10 @@ namespace Bus_Booking_System.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index([FromServices] Bus_Booking_System.Services.TravelStore store)
         {
-            return View();
+            if (!await store.Ready()) return View("Setup");
+            return View(new SearchInput { Cities = await store.Cities() });
         }
 
         public IActionResult Privacy()

@@ -1,0 +1,15 @@
+@model SearchInput
+@{ ViewData["Title"] = "Find your bus"; }
+<span class="eyebrow">LET’S GET YOU THERE</span><h1>Find your bus</h1>
+<section class="search-panel"><partial name="_SearchForm" model="Model" /><div asp-validation-summary="All" class="validation"></div></section>
+<div class="section-heading mt-4"><h2>@Model.Origin → @Model.Destination</h2><span>@Model.Date.ToString("ddd, dd MMM yyyy") · @Model.Results.Count departures</span></div>
+@if (!Model.Results.Any())
+{
+    <section class="panel empty"><h3>No matching departures</h3><p>Try another date, route or passenger count. Sample departures run for 30 days after the setup script is executed.</p></section>
+}
+@foreach (var trip in Model.Results)
+{
+    <article class="trip-card"><div class="operator"><span class="coach-icon" aria-hidden="true">▣</span><div><h3>@trip.Company</h3><span class="pill">@trip.BusType</span></div></div>
+    <div class="trip-times"><div><strong>@trip.Departure.ToString("HH:mm")</strong><span>@trip.BoardingPoint</span></div><div class="duration">@((int)(trip.Arrival - trip.Departure).TotalHours)h @((trip.Arrival - trip.Departure).Minutes)m<span>────── →</span></div><div><strong>@trip.Arrival.ToString("HH:mm")</strong><span>@trip.ArrivalPoint</span><small>@trip.Arrival.ToString("dd MMM")</small></div></div>
+    <div class="trip-price"><strong>@TravelTime.Money(trip.Fare)</strong><small>per passenger · @trip.AvailableSeats seats left</small><a class="button" asp-action="Checkout" asp-route-id="@trip.Id" asp-route-passengers="@Model.Passengers">Choose seats →</a></div></article>
+}

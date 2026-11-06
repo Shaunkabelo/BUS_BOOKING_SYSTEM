@@ -6,12 +6,12 @@ namespace Bus_Booking_System.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Login", "Account");
         }
 
         public IActionResult Login()
         {
-            return View();
+            return RedirectToAction("Login", "Account");
         }
     }
 }

@@ -1,0 +1,7 @@
+@model LoginInput
+@{ ViewData["Title"] = "Sign in"; }
+<section class="panel auth-panel"><span class="eyebrow">WELCOME BACK</span><h1>Ready for your next trip?</h1><p>Sign in to book a seat and manage your journeys.</p>
+<form asp-action="Login" method="post"><input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" /><div asp-validation-summary="All" class="validation"></div>
+<label asp-for="Email"></label><input asp-for="Email" class="form-control" autocomplete="email" />
+<label asp-for="Password"></label><input asp-for="Password" class="form-control" autocomplete="current-password" />
+<button class="button full" type="submit">Sign in</button></form><p class="mt-3">New here? <a asp-action="Register">Create your account</a></p></section>

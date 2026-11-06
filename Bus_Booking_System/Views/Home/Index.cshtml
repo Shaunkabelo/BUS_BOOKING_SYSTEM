@@ -1,8 +1,15 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@model SearchInput
+@{ ViewData["Title"] = "Your next journey starts here"; }
+<section class="hero">
+    <div class="hero-copy"><span class="eyebrow">EXPLORE SOUTH AFRICA</span><h1>Good journeys.<br />Great destinations.</h1><p>From city streets to coastal escapes. Find your bus, pick your seat, and make your next move.</p><span class="hero-tag">One-way trips · Simple booking · Prices in rand</span></div>
+    <div class="journey-art" aria-hidden="true"><div class="sun"></div><div class="road"></div><div class="bus-art"><div class="bus-windows"></div><span>MZANSI BUS</span><i></i><b></b></div><span class="art-caption">The journey is part of the story.</span></div>
+</section>
+<section class="search-panel"><h2>Where are we taking you?</h2><partial name="_SearchForm" model="Model" /></section>
+<section class="section-block"><div class="section-heading"><div><span class="eyebrow">A LITTLE INSPIRATION</span><h2>Places worth the journey</h2></div><p>Sample routes to get you started</p></div>
+<div class="destination-grid">
+    <a class="destination-card durban" asp-controller="Booking" asp-action="Search" asp-route-Origin="Johannesburg" asp-route-Destination="Durban" asp-route-Date="@Model.Date.ToString("yyyy-MM-dd")"><span>COASTAL DAYS</span><h3>Durban</h3><p>Johannesburg → Durban</p><strong>Find a departure →</strong></a>
+    <a class="destination-card cape" asp-controller="Booking" asp-action="Search" asp-route-Origin="Johannesburg" asp-route-Destination="Cape Town" asp-route-Date="@Model.Date.ToString("yyyy-MM-dd")"><span>MOUNTAINS MEET THE SEA</span><h3>Cape Town</h3><p>Johannesburg → Cape Town</p><strong>Find a departure →</strong></a>
+    <a class="destination-card joburg" asp-controller="Booking" asp-action="Search" asp-route-Origin="Durban" asp-route-Destination="Johannesburg" asp-route-Date="@Model.Date.ToString("yyyy-MM-dd")"><span>THE CITY THAT MOVES</span><h3>Johannesburg</h3><p>Durban → Johannesburg</p><strong>Find a departure →</strong></a>
+</div></section>
+<section class="benefits"><div><b>01 · Find your route</b><p>Compare departure times, coach types and fares.</p></div><div><b>02 · Make it yours</b><p>Choose seats and add each passenger’s name.</p></div><div><b>03 · Keep your ticket</b><p>View bookings or print a ticket from your account.</p></div></section>
+<p class="muted">This is a demonstration project. Operators, availability and fares are sample data; no real travel or payment is provided.</p>

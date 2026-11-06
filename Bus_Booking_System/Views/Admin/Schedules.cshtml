@@ -1,0 +1,5 @@
+@model List<Trip>
+@{ ViewData["Title"] = "Manage departures"; }
+<partial name="_AdminNav" /><div class="section-heading"><h1>Upcoming departures</h1><a class="button" asp-action="AddSchedule">Add departure</a></div><section class="panel table-responsive"><table class="table"><thead><tr><th>Route</th><th>Operator</th><th>Departure</th><th>Fare</th><th>Seats left</th><th>Action</th></tr></thead><tbody>
+@foreach (var t in Model) { <tr><td>@t.Origin → @t.Destination</td><td>@t.Company</td><td>@t.Departure.ToString("dd MMM yyyy HH:mm")</td><td>@TravelTime.Money(t.Fare)</td><td>@t.AvailableSeats / @t.TotalSeats</td><td><form asp-action="DeleteSchedule" method="post" onsubmit="return confirm('Delete this departure? Departures with booking history are protected.')"><input type="hidden" name="id" value="@t.Id" /><button class="text-button danger" type="submit">Delete</button></form></td></tr> }
+</tbody></table></section>

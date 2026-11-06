@@ -1,78 +1,58 @@
-﻿using Bus_Booking_Library.Models.Domain;
-using Bus_Booking_Library.Repository;
+using Bus_Booking_System.Models;
+using Bus_Booking_System.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 
-namespace Bus_Booking_System.Controllers
+namespace Bus_Booking_System.Controllers;
+
+[Authorize(Roles = "Admin")]
+public class AdminController(TravelStore store) : Controller
 {
-    public class AdminController : Controller
+    public async Task<IActionResult> Index() => View(await store.Reservations(null));
+    public async Task<IActionResult> BusManagement() => View(await store.Fleet());
+    public IActionResult AddBus() => View("EditBus", new FleetInput());
+    public async Task<IActionResult> EditBus(int id)
     {
-        private readonly IAdminRepository _adminRepo;
-
-        public AdminController(IAdminRepository adminRepo)
+        var bus = (await store.Fleet()).SingleOrDefault(b => b.Id == id);
+        return bus == null ? NotFound() : View(bus);
+    }
+    [HttpPost]
+    public async Task<IActionResult> EditBus(FleetInput input)
+    {
+        if (ModelState.IsValid)
         {
-            _adminRepo = adminRepo;
+            try { await store.SaveBus(input); TempData["Message"] = "Bus saved."; return RedirectToAction(nameof(BusManagement)); }
+            catch (InvalidOperationException ex) { ModelState.AddModelError("", ex.Message); }
+            catch (SqlException ex) when (ex.Number is 2601 or 2627) { ModelState.AddModelError("", "That bus number is already registered."); }
         }
-
-        // View all buses
-        public IActionResult Index()
+        return View(input);
+    }
+    [HttpPost]
+    public async Task<IActionResult> DeleteBus(int id)
+    {
+        try { TempData["Message"] = await store.DeleteBus(id) ? "Bus deleted." : "A bus with schedules cannot be deleted."; }
+        catch (SqlException ex) when (ex.Number == 547) { TempData["Message"] = "A bus with schedules cannot be deleted."; }
+        return RedirectToAction(nameof(BusManagement));
+    }
+    public async Task<IActionResult> Schedules() => View(await store.Schedules());
+    public async Task<IActionResult> AddSchedule() => View(new ScheduleInput { Buses = await store.Fleet() });
+    [HttpPost]
+    public async Task<IActionResult> AddSchedule(ScheduleInput input)
+    {
+        if (ModelState.IsValid)
         {
-            return View();
+            try { await store.AddSchedule(input); TempData["Message"] = "Departure added."; return RedirectToAction(nameof(Schedules)); }
+            catch (InvalidOperationException ex) { ModelState.AddModelError("", ex.Message); }
         }
-
-        // Display the form for adding a new bus
-        [HttpGet]
-        public async Task<IActionResult> AddBus()
-        {
-            var buses = await _adminRepo.GetAllBuses(); // Fetch all buses
-            var newBus = new Bus(); // Empty bus instance for the form
-
-            var model = Tuple.Create(buses, newBus);
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddBus(Bus newBus)
-        {
-            if (ModelState.IsValid)
-            {
-                await _adminRepo.InsertBus(newBus.BusID, newBus.BusNumber, newBus.Company, newBus.BusType, newBus.TotalSeats, newBus.AvailableSeats);
-                return RedirectToAction("AddBus"); // Refresh page after adding
-            }
-
-            var buses = await _adminRepo.GetAllBuses();
-            var model = Tuple.Create(buses, newBus);
-            return View(model);
-        }
-
-
-
-
-
-        [HttpGet]
-        public async Task<IActionResult> BusManagement()
-        {
-            var buses = await _adminRepo.GetAllBuses();
-            return View(buses);
-        }
-
-
-        
-        // Display the form for updating a bus
-        public IActionResult EditBus(int id)
-        {
-            return View(new Bus { BusID = id }); // Dummy data for now
-        }
-
-        // Handle bus update
-        [HttpPost]
-        public async Task<IActionResult> EditBus(Bus model)
-        {
-            if (ModelState.IsValid)
-            {
-                await _adminRepo.UpdateBus(model.BusID, model.BusNumber, model.BusType, model.TotalSeats, model.AvailableSeats);
-                return RedirectToAction("Index");
-            }
-            return View(model);
-        }
+        input.Buses = await store.Fleet();
+        return View(input);
+    }
+    [HttpPost]
+    public async Task<IActionResult> DeleteSchedule(int id)
+    {
+        try { TempData["Message"] = await store.DeleteSchedule(id) ? "Departure deleted." : "Departures with booking history cannot be deleted."; }
+        catch (SqlException ex) when (ex.Number == 547) { TempData["Message"] = "Departures with booking history cannot be deleted."; }
+        return RedirectToAction(nameof(Schedules));
     }
 }

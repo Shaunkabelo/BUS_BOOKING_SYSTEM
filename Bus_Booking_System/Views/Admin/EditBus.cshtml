@@ -1,34 +1,7 @@
-﻿@model Bus_Booking_Library.Models.Domain.Bus
-@{
-    ViewData["Title"] = "Edit Bus";
-}
-
-@{
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
-}
-
-
-<h2>Edit Bus</h2>
-
-<form method="post" asp-action="EditBus">
-    <input type="hidden" asp-for="BusID" />
-
-    <div class="mb-3">
-        <label>Bus Number</label>
-        <input asp-for="BusNumber" class="form-control" required />
-    </div>
-    <div class="mb-3">
-        <label>Bus Type</label>
-        <input asp-for="BusType" class="form-control" required />
-    </div>
-    <div class="mb-3">
-        <label>Total Seats</label>
-        <input asp-for="TotalSeats" class="form-control" type="number" required />
-    </div>
-    <div class="mb-3">
-        <label>Available Seats</label>
-        <input asp-for="AvailableSeats" class="form-control" type="number" required />
-    </div>
-    <button type="submit" class="btn btn-primary">Update Bus</button>
-</form>
-
+@model FleetInput
+@{ ViewData["Title"] = Model.Id == 0 ? "Add bus" : "Edit bus"; }
+<partial name="_AdminNav" /><section class="panel narrow"><h1>@ViewData["Title"]</h1><form asp-action="EditBus" method="post"><div asp-validation-summary="All" class="validation"></div><input asp-for="Id" type="hidden" />
+<label asp-for="BusNumber">Bus / registration number</label><input asp-for="BusNumber" class="form-control" />
+<label asp-for="Company">Operator</label><input asp-for="Company" class="form-control" />
+<label asp-for="BusType">Coach type</label><input asp-for="BusType" class="form-control" />
+<label asp-for="TotalSeats">Seat capacity (10–80)</label><input asp-for="TotalSeats" class="form-control" /><p class="muted">Capacity is fixed once schedules exist. Availability is calculated separately for each departure.</p><button type="submit" class="button">Save bus</button> <a asp-action="BusManagement">Cancel</a></form></section>

@@ -10,3 +10,16 @@ F:\Visual Studio 2024\BUS_BOOKING_SYSTEM\Bus_Booking_Library\obj\Debug\net8.0\re
 F:\Visual Studio 2024\BUS_BOOKING_SYSTEM\Bus_Booking_Library\obj\Debug\net8.0\Bus_Booking_Library.pdb
 F:\Visual Studio 2024\BUS_BOOKING_SYSTEM\Bus_Booking_Library\obj\Debug\net8.0\ref\Bus_Booking_Library.dll
 F:\Visual Studio 2024\BUS_BOOKING_SYSTEM\Bus_Booking_Library\obj\Debug\net8.0\Bus_Booking_Library.csproj.AssemblyReference.cache
+F:\2026 Visual Studio\BUS_BOOKING_SYSTEM\Bus_Booking_Library\bin\Debug\net8.0\Bus_Booking_Library.deps.json
+F:\2026 Visual Studio\BUS_BOOKING_SYSTEM\Bus_Booking_Library\bin\Debug\net8.0\Bus_Booking_Library.dll
+F:\2026 Visual Studio\BUS_BOOKING_SYSTEM\Bus_Booking_Library\bin\Debug\net8.0\Bus_Booking_Library.pdb
+F:\2026 Visual Studio\BUS_BOOKING_SYSTEM\Bus_Booking_Library\obj\Debug\net8.0\Bus_Booking_Library.csproj.AssemblyReference.cache
+F:\2026 Visual Studio\BUS_BOOKING_SYSTEM\Bus_Booking_Library\obj\Debug\net8.0\Bus_Booking_Library.GeneratedMSBuildEditorConfig.editorconfig
+F:\2026 Visual Studio\BUS_BOOKING_SYSTEM\Bus_Booking_Library\obj\Debug\net8.0\Bus_Booking_Library.AssemblyInfoInputs.cache
+F:\2026 Visual Studio\BUS_BOOKING_SYSTEM\Bus_Booking_Library\obj\Debug\net8.0\Bus_Booking_Library.AssemblyInfo.cs
+F:\2026 Visual Studio\BUS_BOOKING_SYSTEM\Bus_Booking_Library\obj\Debug\net8.0\Bus_Booking_Library.csproj.CoreCompileInputs.cache
+F:\2026 Visual Studio\BUS_BOOKING_SYSTEM\Bus_Booking_Library\obj\Debug\net8.0\Bus_Booking_Library.sourcelink.json
+F:\2026 Visual Studio\BUS_BOOKING_SYSTEM\Bus_Booking_Library\obj\Debug\net8.0\Bus_Booking_Library.dll
+F:\2026 Visual Studio\BUS_BOOKING_SYSTEM\Bus_Booking_Library\obj\Debug\net8.0\refint\Bus_Booking_Library.dll
+F:\2026 Visual Studio\BUS_BOOKING_SYSTEM\Bus_Booking_Library\obj\Debug\net8.0\Bus_Booking_Library.pdb
+F:\2026 Visual Studio\BUS_BOOKING_SYSTEM\Bus_Booking_Library\obj\Debug\net8.0\ref\Bus_Booking_Library.dll

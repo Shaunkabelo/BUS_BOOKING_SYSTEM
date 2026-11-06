@@ -1,0 +1,8 @@
+@model SearchInput
+<form asp-controller="Booking" asp-action="Search" method="get" class="search-form">
+    <div><label asp-for="Origin">Leaving from</label><select asp-for="Origin" class="form-select">@foreach (var city in Model.Cities) { <option value="@city">@city</option> }</select></div>
+    <div><label asp-for="Destination">Going to</label><select asp-for="Destination" class="form-select">@foreach (var city in Model.Cities) { <option value="@city">@city</option> }</select></div>
+    <div><label asp-for="Date">Departure date</label><input asp-for="Date" type="date" min="@TravelTime.Now.ToString("yyyy-MM-dd")" max="@TravelTime.Now.AddDays(90).ToString("yyyy-MM-dd")" class="form-control" /></div>
+    <div><label asp-for="Passengers">Passengers</label><select asp-for="Passengers" class="form-select">@for (var i = 1; i <= 6; i++) { <option value="@i">@i @(i == 1 ? "passenger" : "passengers")</option> }</select></div>
+    <button class="button" type="submit">Search buses <span aria-hidden="true">→</span></button>
+</form>

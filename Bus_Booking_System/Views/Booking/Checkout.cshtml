@@ -1,0 +1,39 @@
+@model CheckoutInput
+@{ ViewData["Title"] = "Seats and passengers"; var trip = Model.Trip!; }
+<span class="eyebrow">YOUR TRIP, YOUR SEAT</span><h1>Make yourself comfortable.</h1>
+<p>@trip.Origin → @trip.Destination · @trip.Departure.ToString("ddd, dd MMM yyyy · HH:mm") · @trip.Company</p>
+<form asp-action="Checkout" method="post" id="checkout-form">
+<input asp-for="TripId" type="hidden" /><input asp-for="Passengers" type="hidden" /><input asp-for="RequestId" type="hidden" />
+<div asp-validation-summary="All" class="validation"></div>
+<div class="checkout-grid"><section class="panel"><h2>1. Pick @Model.Passengers @(Model.Passengers == 1 ? "seat" : "seats")</h2><p>Seats are confirmed when you complete the demo booking.</p>
+<div class="seat-legend"><span>□ Available</span><span>■ Selected</span><span class="muted">▧ Unavailable</span></div>
+<div class="seat-map" data-passengers="@Model.Passengers"><div class="driver">FRONT OF COACH · ◉</div>
+@for (var seat = 1; seat <= trip.TotalSeats; seat++)
+{
+    var unavailable = Model.TakenSeats.Contains(seat);
+    <label class="seat @(unavailable ? "unavailable" : "")"><input type="checkbox" name="Seats" value="@seat" checked="@(Model.Seats.Contains(seat) && !unavailable)" disabled="@unavailable" aria-label="Seat @seat @(unavailable ? "unavailable" : "")" /><span>@seat</span></label>
+}
+</div><p id="seat-count" aria-live="polite" class="muted mt-3"></p></section>
+<div><section class="panel"><h2>2. Passenger details</h2><p>Names are assigned to selected seats in ascending seat order.</p>
+@for (var i = 0; i < Model.Passengers; i++) { <label asp-for="Travellers[i].Name">Passenger @(i + 1) full name</label><input asp-for="Travellers[i].Name" class="form-control" required maxlength="100" /> }
+</section><section class="panel mt-3"><h2>3. Review and confirm</h2><div class="price-line"><span>@Model.Passengers × @TravelTime.Money(trip.Fare)</span><strong>@TravelTime.Money(trip.Fare * Model.Passengers)</strong></div><p class="notice">Demo checkout: no money is charged and this ticket is not valid for travel.</p><label class="terms"><input asp-for="AcceptTerms" /> I understand this is a demo booking. I can cancel before departure from My bookings.</label><button class="button full" type="submit">Confirm demo booking →</button></section></div></div>
+</form>
+@section Scripts {
+<script>
+(() => {
+    const map = document.querySelector('.seat-map');
+    const boxes = [...map.querySelectorAll('input:not(:disabled)')];
+    const count = Number(map.dataset.passengers);
+    function update() {
+        const selected = boxes.filter(b => b.checked);
+        boxes.forEach(b => { b.disabled = !b.checked && selected.length >= count; });
+        document.getElementById('seat-count').textContent = `${selected.length} of ${count} seats selected`;
+    }
+    boxes.forEach(b => b.addEventListener('change', update));
+    document.getElementById('checkout-form').addEventListener('submit', e => {
+        if (boxes.filter(b => b.checked).length !== count) { e.preventDefault(); document.getElementById('seat-count').textContent = `Please select exactly ${count} seats.`; }
+    });
+    update();
+})();
+</script>
+}

@@ -1,50 +1,5 @@
-﻿@model IEnumerable<Bus_Booking_Library.Models.Domain.Bus>
-
-@{
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewData["Title"] = "Bus Management";
-}
-<link href="~/css/Admin.css" rel="stylesheet" />
-<h2>Bus Management</h2>
-
-<a href="@Url.Action("AddBus", "Admin")" class="btn btn-primary">Add New Bus</a>
-
-<table class="table mt-3">
-    <thead>
-        <tr>
-            <th>Bus ID</th>
-            <th>Bus Number</th>
-            <th>Type</th>
-            <th>Total Seats</th>
-            <th>Available Seats</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model != null && Model.Any())
-        {
-            @foreach (var bus in Model)
-            {
-                <tr>
-                    <td>@bus.BusID</td>
-                    <td>@bus.BusNumber</td>
-                    <td>@bus.BusType</td>
-                    <td>@bus.TotalSeats</td>
-                    <td>@bus.AvailableSeats</td>
-                    <td>
-                        <a href="@Url.Action("EditBus", "Admin", new { id = bus.BusID })" class="btn btn-warning">Edit</a>
-                        <a href="@Url.Action("DeleteBus", "Admin", new { id = bus.BusID })" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this bus?');">Delete</a>
-                    </td>
-                </tr>
-            }
-        }
-        else
-        {
-            <tr>
-                <td colspan="6" class="text-center">No buses available.</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-
+@model List<Reservation>
+@{ ViewData["Title"] = "Administration"; }
+<partial name="_AdminNav" /><span class="eyebrow">ADMINISTRATION</span><h1>A view of every journey.</h1>
+<div class="stats"><section class="panel"><span>Total bookings</span><strong>@Model.Count</strong></section><section class="panel"><span>Demo confirmed</span><strong>@Model.Count(r => r.Status == "DemoConfirmed")</strong></section><section class="panel"><span>Confirmed demo value (not revenue)</span><strong>@TravelTime.Money(Model.Where(r => r.Status == "DemoConfirmed").Sum(r => r.Total))</strong></section></div>
+<section class="panel"><h2>All bookings</h2><div class="table-responsive"><table class="table"><thead><tr><th>Customer</th><th>Journey</th><th>Departure</th><th>Total</th><th>Status</th></tr></thead><tbody>@foreach (var r in Model) { <tr><td>@r.CustomerName<br /><small>@r.Email</small></td><td>@r.Origin → @r.Destination</td><td>@r.Departure.ToString("dd MMM yyyy HH:mm")</td><td>@TravelTime.Money(r.Total)</td><td>@(r.Status == "Cancelled" ? "Cancelled" : "Demo confirmed")</td></tr> }</tbody></table></div>@if (!Model.Any()) { <p class="muted">No bookings yet.</p> }</section>
